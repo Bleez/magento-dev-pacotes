@@ -245,3 +245,143 @@ Para essa estrutura funcionar não tem segredo, basta especificar os caminhos do
     __DIR__ . '/src' // <--- define a pasta /src aqui
 );
 ```
+## Testando pacotes
+
+Para testar os pacotes basta você rodar o comando `composer test-unit`.
+
+Este comando irá automaticamente buscar por testes unitários dentro da pasta `/packages`.
+
+Exemplo
+```bash
+$ composer test-unit
+```
+
+Dependendo da quantidade de pacotes que você possui, você pode sentir a necessidade de rodar apenas um pacote específico para testar mais rápido. Para isso você deve rodar `composer test-unit -- /packages/meu-pacote`.
+
+Exemplo
+```bash
+$ composer test-unit -- /packages/module-shippings
+```
+
+Caso você queira rodar apenas os testes de uma classe ou método específico você pode usar a opção `--filter`.
+
+Por exemplo, se um dos meus métodos de teste se chama `test_Deve_Cadastrar_Usuario_Com_Sucesso()` eu posso executar:
+
+```bash
+$ composer test-unit -- --filter Deve_Cadastrar_Usuario_Com_Sucesso
+```
+Também é possível rodar os testes em um diretório especifico e aplicar o filtro.
+
+Exemplo
+```bash
+$ composer test-unit -- /packages/module-shippings --filter Deve_Cadastrar_Usuario_Com_Sucesso
+```
+
+### Relatório de cobertura de código
+
+Se você tiver o Xdebug instalado e habilitado será criado automaticamente dentro de `/var/www/test-reports` um relatório de cobertura de código.
+
+Use esse relatório para saber se você está cobrindo bem seu código com testes. O ideal é ter o código com no mínimo 90% de cobertura de código. Se você conseguir isso o relatório ficará todo verdinho. :)
+
+Se você estiver usando o Ambiente de Desenvolvimento o Xdebug já vem instalado e configurado, porém por motivos de performance ele não vem habilitado por padrão.
+
+Isso significa que você pode rodar seus testes sem gerar relatório inicialmente, porém quando desejar que os relatórios sejam gerados execute o comando `xdebug` para habilitá-lo e em seguida rode os testes.
+
+```bash
+$ xdebug
+
+========= XDebug was enabled =========
+
+$ composer test-unit
+
+> ./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.packages --verbose --colors=always
+PHPUnit 6.5.14 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 7.2.31 with Xdebug 2.9.5
+Configuration: /var/www/dev/tests/unit/phpunit.xml.packages
+
+............................                                      28 / 28 (100%)
+
+Time: 8.41 seconds, Memory: 20.00MB
+
+OK (28 tests, 62 assertions)
+
+Generating code coverage report in HTML format ... done
+```
+
+> :warning: Evite lentidão no desenvolvimento dos seus pacotes desabilitando o Xdebug se você não estiver usando. Para isso execute novamente `xdebug` no terminal que ele ficará desabilitado. Assim os testes não gerarão relatórios sempre que você rodá-os.
+
+## Padronização de código
+
+Esse repositório também possui comandos para checagem de padronização de código e pra conserto de padrão de código.
+
+Manter o padrão de código é importante para facilitar a leitura de quem for trabalhar no pacote depois de você.
+
+Todos os pacotes Bleez criados serão incluidos em uma ferramenta de CI que irá validar se o padrão de código está ok e caso contrário você não será capaz de dar merge das suas modificações na `master`.
+
+Para ajudar nisso alguns scripts foram criados para ajudar nesse processo.
+
+### Análise de padrão PSR-2
+
+A PSR-2 é uma padronizaçao internacional de desenvolvimento PHP que dá algumas diretrizes de como o código deve ser escrito.
+
+Rodando o comando `composer check-psr2` você terá um relatório com qualquer código que não se adeque a PSR-2 dentro da pasta `/packages`.
+
+Exemplo
+
+```bash
+$ composer check-psr2
+
+> phpcs -p --standard=PSR2 packages/*/src
+.......E. 9 / 9 (100%)
+
+
+
+FILE: ...ww/packages/module-shippings/src/Model/DescobridorDeAdapters.php
+----------------------------------------------------------------------
+FOUND 1 ERROR AND 1 WARNING AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 13 | WARNING | [ ] Line exceeds 120 characters; contains 210
+    |         |     characters
+ 14 | ERROR   | [x] Opening brace should be on a new line
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+Time: 2.08 secs; Memory: 10MB
+```
+### Analise de padrão de código do projeto
+
+Além da PSR-2 nós da Bleez podemos seguir algumas padronizações nossa de como o código deve ser escrito. Essa padronização será definido dentro do arquivo `.php_cs` na raíz do projeto. **Não altere ele a não ser que seja discutido e aprovado em conjunto sua alteração.**
+
+Com o comando `composer check-cs` é possível verificar se há alguma quebra de padrão definidor dentro deste arquivo.
+
+```bash
+$ composer check-cs
+
+> vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no -v --dry-run --stop-on-violation
+Loaded config default from ".php_cs".
+...............F
+
+Legend: ?-unknown, I-invalid file syntax, file ignored, S-Skipped, .-no changes, F-fixed, E-error
+   1) www/packages/module-shippings/src/Model/DescobridorDeAdapters.php (function_declaration, braces)
+
+Checked all files in 0.593 seconds, 16.000 MB memory used
+```
+
+### Conserto de padrão de código
+
+O comando `composer fix-cs` irá rodar dentro da pasta `/packages` e irá resolver a maioria dos conflitos de padrão de código, sejam PSR-2 ou do que foi definido em `.php_cs`.
+
+Exemplo
+```bash
+$ composer fix-cs
+
+> vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no
+Loaded config default from ".php_cs".
+   1) www/packages/module-shippings/src/Model/DescobridorDeAdapters.php
+
+Fixed all files in 0.690 seconds, 16.000 MB memory used
+```
+
+Infelizmente este comando não consegue corrigir 100% dos conflitos de padrão, portanto para garantir que está tudo correto use os comandos `composer check-psr2` e `composer check-cs`.
