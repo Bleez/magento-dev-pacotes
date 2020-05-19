@@ -64,7 +64,7 @@
         }
     },
     "version": "2.3.5-p1",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "repositories": [
         {
             "type": "composer",
@@ -73,5 +73,11 @@
     ],
     "extra": {
         "magento-force": "override"
+    },
+    "scripts": {
+        "test-unit": "./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist --verbose --colors=always",
+        "check-psr2": "phpcs -p --standard=PSR2 packages/*/src",
+        "check-cs": "vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no -v --dry-run --stop-on-violation",
+        "fix-cs": "vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no"
     }
 }
