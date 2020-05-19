@@ -10,7 +10,7 @@ Caso você queira trabalhar sem usar o ambiente você precisará instalar as dep
 
 ## Registrando os pacotes
 
-Se você instalou o Magento a partide do Ambiente de Desenvolvimento na raiz do mesmo terá uma pasta chamada `/packages`. Nela você colocará todos os pacotes que pretende trabalhar.
+Se você instalou o Magento a partir do Ambiente de Desenvolvimento na raiz do mesmo terá uma pasta chamada `/packages`. Nela você colocará todos os pacotes que pretende trabalhar.
 
 A lógica para trabalhar com os pacotes é simples:
 
@@ -86,7 +86,7 @@ Depois procure a seção `require` e informe ao composer para instalar seu pacot
 
 Depois disso basta rodar `composer update` que o seu pacote será instalado no Magento apontando para o diretório dentro de `/packages`.
 
-> Se você estiver usando o Ambiente de Desenvolvimento rode com `composer update` de dentro do container.
+> :warning: Se você estiver usando o Ambiente de Desenvolvimento rode com `composer update` de dentro do container.
 
 ### Trabalhando com novos pacotes
 
@@ -113,7 +113,7 @@ Você pode comprovar isso olhando o `composer.json` do próprio módulo em `/pac
     ...
 ```
 
-> Se você estiver criando seu pacote do zero que dependa de qualquer outro pacote, sempre coloque ele no require com a versão correta que você está trabalhando. Assim evitará problemas de compatibilidade no futuro.
+> :warning: Se você estiver criando seu pacote do zero que dependa de qualquer outro pacote, sempre coloque ele no require com a versão correta que você está trabalhando. Assim evitará problemas de compatibilidade no futuro.
 
 Isso significa que quando você rodar o `composer update` ele irá falhar pois ele não consegue encontrar o Bleez Shippings. Uma mensagem parecida com essa irá aparecer:
 
