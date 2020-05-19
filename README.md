@@ -14,7 +14,7 @@ Se você instalou o Magento a partide do Ambiente de Desenvolvimento na raiz do 
 
 A lógica para trabalhar com os pacotes é simples:
 
-Você ter seu código em uma pasta onde você possa editar os arquivos e depois vai "enganar" o Magento fazendo-o achar que esse pacote está na nuvem quando na verdade ele está na sua máquina.
+Você colocará o código em uma pasta onde você possa editar os arquivos e depois vai "enganar" o Magento fazendo-o achar que esse pacote está na nuvem quando na verdade ele está na sua máquina.
 
 No fim das contas o Magento vai instalar o seu pacote na pasta `/vendor` com um link simbólico para a pasta onde tem os arquivos que você vai editar.
 
@@ -96,7 +96,7 @@ Não se esqueça de depois iniciar o git dentro do diretório do seu pacote e co
 
 ### Dependências de outros módulos Bleez
 
-O exemplo do Bleez Correios anteorior não é completamente correto pois ele depende do Bleez Shippings - `bleez/module-shippings` - para funcionar.
+O exemplo do Bleez Correios anterior não é completamente correto pois ele depende do Bleez Shippings - `bleez/module-shippings` - para funcionar.
 
 Você pode comprovar isso olhando o `composer.json` do próprio módulo em `/packages/module-correios-adapter/composer.json`, na seção `require`.
 
@@ -218,8 +218,8 @@ Para essa estrutura funcionar não tem segredo, basta especificar os caminhos do
             "registration.php"
         ],
         "psr-4": {
-            "Bleez\\Correios\\": "src/", // mapeia o namespace ao caminho dos arquivos do módulo
-            "Bleez\\Correios\\Test\\": "tests/" // mapeia o namespace ao caminho dos testes
+            "Bleez\\Correios\\": "src/",
+            "Bleez\\Correios\\Test\\": "tests/"
         }
     },
 
