@@ -20,7 +20,7 @@ No fim das contas o Magento vai instalar o seu pacote na pasta `/vendor` com um 
 
 Os passos a seguir ensinam como fazer isso.
 
-#### Observação sobre a pasta `/packages` :eyes:
+#### :eyes: Observação sobre a pasta `/packages` 
 
 A pasta `/packages` não tem nenhuma relação com o Magento, isso significa que qualquer código que estiver la dentro será automaticamente lido pelo Magento.
 
