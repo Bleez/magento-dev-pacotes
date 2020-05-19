@@ -20,6 +20,14 @@ No fim das contas o Magento vai instalar o seu pacote na pasta `/vendor` com um 
 
 Os passos a seguir ensinam como fazer isso.
 
+#### Observação sobre a pasta `/packages` :eyes:
+
+A pasta `/packages` não tem nenhuma relação com o Magento, isso significa que qualquer código que estiver la dentro será automaticamente lido pelo Magento.
+
+O motivo dessa pasta existir é simplesmente para que fique padronizado um local onde ficará todos os arquivos que você estiver editando e commitando para o Github. Assim os scripts de teste e de análise de padrão de código (vou explicar mais a frente) irão rodar somente lá dentro e não no Magento inteiro.
+
+Isso significa que para que o Magento reconheça o seu código como um pacote instalável é necessário recorrer aos passos seguintes para "enganar" o Magento e fazê-lo pensar que seu código é um pacote pronto para instalação.
+
 ### Trabalhando em pacotes já existentes
 
 Entre na pasta `/packages` e faça clone do projeto que você quer trabalhar. Por exemplo, se você quer trabalhar com o Bleez Correios você irá executar os comandos:
