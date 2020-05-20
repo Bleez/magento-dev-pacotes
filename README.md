@@ -102,6 +102,9 @@ O processo é bem parecido com o processo anterior. A diferença é que no lugar
 
 Não se esqueça de depois iniciar o git dentro do diretório do seu pacote e commitar seu trabalho.
 
+> :warning: **Importante**:
+> É fortemente indicado você usar o [modelo de pacote que criamos](https://github.com/Bleez/modelo-pacote) para já iniciar o seu pacote com boa parte das configurações necessárias prontas.
+
 ### Dependências de outros módulos Bleez
 
 O exemplo do Bleez Correios anterior não é completamente correto pois ele depende do Bleez Shippings - `bleez/module-shippings` - para funcionar.
