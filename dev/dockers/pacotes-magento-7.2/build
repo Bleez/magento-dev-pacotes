@@ -1,0 +1,7 @@
+if [ "$1" == "" ]; then
+  echo "Informe a versão da build"
+  exit;
+fi
+
+docker build . -f pacotes-magento-php7.2.dockerfile -t brunoviana/pacotes-magento-7.2:latest
+docker tag brunoviana/magento-php-7.2:latest brunoviana/pacotes-magento-7.2:$1
