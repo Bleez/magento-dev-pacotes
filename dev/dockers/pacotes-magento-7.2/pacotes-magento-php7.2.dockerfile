@@ -34,5 +34,6 @@ RUN pecl install mcrypt-1.0.2 \
 
 RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
-RUN yes | pecl install xdebug
+RUN pecl install xdebug-2.8.1 \
+    && docker-php-ext-enable xdebug
 
