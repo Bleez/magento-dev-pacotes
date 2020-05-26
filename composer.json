@@ -11,6 +11,9 @@
         "sort-packages": true
     },
     "require": {
+        "bleez/module-shippings": "*",
+        "bleez/module-correios-adapter": "*",
+        "bleez/module-instagram": "*",
         "magento/product-community-edition": "2.3.5-p1"
     },
     "require-dev": {
@@ -69,14 +72,17 @@
         {
             "type": "composer",
             "url": "https://repo.magento.com/"
-        }
+        },
+        { "type": "path", "url": "./packages/bleez-module-correios", "options": { "symlink": true }},
+        { "type": "path", "url": "./packages/bleez-module-shippings", "options": { "symlink": true }},
+        { "type": "path", "url": "./packages/module-instagram", "options": { "symlink": true }}
     ],
     "extra": {
         "magento-force": "override"
     },
     "scripts": {
-        "test-unit": "./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.dist --verbose --colors=always",
-        "check-psr2": "phpcs -p --standard=PSR2 packages/*/src",
+        "test-unit": "./vendor/bin/phpunit -c dev/tests/unit/phpunit.xml.packages --verbose --colors=always",
+        "check-psr2": "vendor/bin/phpcs -p --standard=PSR2 --extensions=php packages/*/src",
         "check-cs": "vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no -v --dry-run --stop-on-violation",
         "fix-cs": "vendor/bin/php-cs-fixer fix --config .php_cs --using-cache=no"
     }
