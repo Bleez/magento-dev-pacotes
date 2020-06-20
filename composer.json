@@ -29,7 +29,8 @@
         "phpstan/phpstan": "^0.12.2",
         "phpunit/phpunit": "~6.5.0",
         "sebastian/phpcpd": "~3.0.0",
-        "squizlabs/php_codesniffer": "~3.4.0"
+        "squizlabs/php_codesniffer": "~3.4.0",
+        "symfony/var-dumper": "^5.2@dev"
     },
     "conflict": {
         "gene/bluefoot": "*"
