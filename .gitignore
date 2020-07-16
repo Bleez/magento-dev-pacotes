@@ -70,3 +70,5 @@ atlassian*
 /packages
 composer.json
 composer.lock
+config.php
+env.original.php
