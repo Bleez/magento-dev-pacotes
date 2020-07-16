@@ -68,3 +68,5 @@ atlassian*
 !/generated/.htaccess
 .DS_Store
 /packages
+composer.json
+composer.lock

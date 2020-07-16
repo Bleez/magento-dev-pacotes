@@ -51,10 +51,6 @@ location ~* ^/setup($|/) {
         fastcgi_read_timeout 600s;
         fastcgi_connect_timeout 600s;
 
-        proxy_buffer_size          512k;
-        proxy_buffers              4 512k;
-        proxy_busy_buffers_size    512k;
-
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         include        fastcgi_params;
@@ -80,10 +76,6 @@ location ~* ^/update($|/) {
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         fastcgi_param  PATH_INFO        $fastcgi_path_info;
         include        fastcgi_params;
-
-        proxy_buffer_size          512k;
-        proxy_buffers              4 512k;
-        proxy_busy_buffers_size    512k;
     }
 
     # Deny everything but index.php
@@ -195,10 +187,6 @@ location ~ ^/(index|get|static|errors/report|errors/404|errors/503|health_check)
     fastcgi_param  PHP_VALUE "memory_limit=756M \n max_execution_time=18000";
     fastcgi_read_timeout 600s;
     fastcgi_connect_timeout 600s;
-
-    proxy_buffer_size          512k;
-    proxy_buffers              4 512k;
-    proxy_busy_buffers_size    512k;
 
     fastcgi_index  index.php;
     fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
