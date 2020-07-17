@@ -72,3 +72,4 @@ composer.json
 composer.lock
 config.php
 env.original.php
+.bash_history
