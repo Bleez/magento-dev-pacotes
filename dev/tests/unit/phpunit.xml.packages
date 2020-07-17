@@ -30,7 +30,7 @@
     </listeners>
     <logging>
 
-        <log type="coverage-html" target="/var/www/var/test-reports/coverage" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-html" target="../../../var/test-reports/coverage" charset="UTF-8" yui="true" highlight="true"/>
 
         <!--coverage_cov_placeholder
             <log type="coverage-php" target="{{coverage_dir}}/test-reports/coverage.cov"/>
